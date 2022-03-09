@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,5 +43,43 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e): JsonResponse
+    {
+        return match (true) {
+            $e instanceof InvalidApiKeyException, $e instanceof MissingApiKeyException => response()
+                ->json([
+                    'message' => $e->getMessage(),
+                    'error' => Response::$statusTexts[Response::HTTP_UNAUTHORIZED]
+                ], Response::HTTP_UNAUTHORIZED),
+
+            $e instanceof ValidationException => response()
+                ->json([
+                    'message' => trans('exceptions.invalid-params'),
+                    'error' => $e->validator->errors()
+                ], Response::HTTP_NOT_ACCEPTABLE),
+
+            $e instanceof QueryException => response()->json([
+                'message' => trans('exceptions.database-error'),
+                'error' => Response::$statusTexts[Response::HTTP_BAD_GATEWAY]
+            ], Response::HTTP_BAD_GATEWAY),
+
+            $e instanceof NotFoundHttpException => response()->json([
+                'message' => trans('exceptions.not-found'),
+                'error' => Response::$statusTexts[Response::HTTP_NOT_FOUND]
+            ], Response::HTTP_NOT_FOUND),
+
+            $e instanceof MethodNotAllowedHttpException => response()->json([
+                'message' => trans('exceptions.method-not-allowed'),
+                'error' => Response::$statusTexts[Response::HTTP_METHOD_NOT_ALLOWED]
+            ], Response::HTTP_METHOD_NOT_ALLOWED),
+
+            default => response()->json([
+                'message' => trans('exceptions.generic-error'),
+                'error' => Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR],
+                'details' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR),
+        };
     }
 }
