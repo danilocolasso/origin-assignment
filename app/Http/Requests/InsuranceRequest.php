@@ -2,12 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\HouseEnum;
 use App\Enums\MaritalStatusEnum;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class InsuranceRequest extends FormRequest
 {
+    public const FIRST_CAR_YEAR = 1884;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,14 +30,15 @@ class InsuranceRequest extends FormRequest
     public function rules()
     {
         return [
-            'age' => ['required', 'gte:0'],
-            'dependents' => ['required', 'gte:0'],
-            'house' => 'required',
-            'income' => ['required', 'gte:0'],
+            'age' => ['required', 'integer', 'gte:0'],
+            'dependents' => ['required', 'integer', 'gte:0'],
+            'house' => ['required', 'array:ownership_status', Rule::in(HouseEnum::all())], // TODO user cant have no houses
+            'income' => ['required', 'integer', 'gte:0'],
             'marital_status' => ['required', Rule::in(MaritalStatusEnum::all())],
-            'risk_questions' => ['required', 'array'],
-            'risk_questions.*' => 'bool',
-            'vehicle' => 'required',
+            'risk_questions' => ['required', 'array', 'min:3'],
+            'risk_questions.*' => ['bool'],
+            'vehicle' => ['required', 'array:year'], // TODO same as house
+            'vehicle.year' => ['integer', 'between:' . implode(',', [self::FIRST_CAR_YEAR, Carbon::today()->year])],
         ];
     }
 
