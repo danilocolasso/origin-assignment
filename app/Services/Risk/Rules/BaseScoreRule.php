@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Risk;
+namespace App\Services\Risk\Rules;
 
 use App\DTO\InputDTO;
 use App\DTO\ProfilesDTO;

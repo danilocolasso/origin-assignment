@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Services\Risk;
+namespace App\Services\Risk;
 
 use App\DTO\InputDTO;
 use App\DTO\ProfilesDTO;
 use App\Enums\ProfileEnum;
-use App\Rules\Risk\AgeRule;
-use App\Rules\Risk\BaseScoreRule;
-use App\Rules\Risk\DependentsRule;
-use App\Rules\Risk\HouseRule;
-use App\Rules\Risk\IncomeRule;
-use App\Rules\Risk\InelegibleRule;
-use App\Rules\Risk\MaritalStatusRule;
-use App\Rules\Risk\VehicleRule;
+use App\Services\Risk\Rules\AgeRule;
+use App\Services\Risk\Rules\BaseScoreRule;
+use App\Services\Risk\Rules\DependentsRule;
+use App\Services\Risk\Rules\HouseRule;
+use App\Services\Risk\Rules\IncomeRule;
+use App\Services\Risk\Rules\InelegibleRule;
+use App\Services\Risk\Rules\MaritalStatusRule;
+use App\Services\Risk\Rules\VehicleRule;
 
 class RiskProfileService
 {

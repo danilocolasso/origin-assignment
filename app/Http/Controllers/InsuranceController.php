@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\InputDTO;
 use App\Http\Requests\InsuranceRequest;
-use App\Http\Services\Risk\RiskProfileService;
+use App\Services\Risk\RiskProfileService;
 use Illuminate\Http\JsonResponse;
 
 class InsuranceController extends Controller
