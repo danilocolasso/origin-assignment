@@ -32,7 +32,7 @@ class InsuranceRequest extends FormRequest
         return [
             'age' => ['required', 'integer', 'gte:0'],
             'dependents' => ['required', 'integer', 'gte:0'],
-            'house' => ['required', 'array:ownership_status', Rule::in(HouseEnum::all())], // TODO user cant have no houses
+            'house' => ['required', 'array', Rule::in(HouseEnum::all())],
             'income' => ['required', 'integer', 'gte:0'],
             'marital_status' => ['required', Rule::in(MaritalStatusEnum::all())],
             'risk_questions' => ['required', 'array', 'min:3'],

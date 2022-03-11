@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InsuranceRequest;
+use App\Http\Services\RiskProfileService;
 use Illuminate\Http\JsonResponse;
 
 class InsuranceController extends Controller
 {
     public function risk(InsuranceRequest $request): JsonResponse
     {
-        return response()->json($request->all());
+        $riskProfileService = new RiskProfileService($request->all());
+
+        return response()->json($riskProfileService->calculate());
     }
+
+
 }
