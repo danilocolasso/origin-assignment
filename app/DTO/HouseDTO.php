@@ -12,5 +12,5 @@ class HouseDTO extends DTO
         MapFrom('ownership_status'),
         MapTo('ownership_status')
     ]
-    public string $ownershipStatus;
+    public ?string $ownershipStatus;
 }

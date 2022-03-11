@@ -32,12 +32,13 @@ class InsuranceRequest extends FormRequest
         return [
             'age' => ['required', 'integer', 'gte:0'],
             'dependents' => ['required', 'integer', 'gte:0'],
-            'house' => ['required', 'array', Rule::in(HouseEnum::all())],
+            'house' => ['present', 'array'],
+            'house.ownership_status' => ['string', Rule::in(HouseEnum::all())],
             'income' => ['required', 'integer', 'gte:0'],
             'marital_status' => ['required', Rule::in(MaritalStatusEnum::all())],
             'risk_questions' => ['required', 'array', 'min:3'],
             'risk_questions.*' => ['bool'],
-            'vehicle' => ['required', 'array:year'], // TODO same as house
+            'vehicle' => ['present', 'array'],
             'vehicle.year' => ['integer', 'between:' . implode(',', [self::FIRST_CAR_YEAR, Carbon::today()->year])],
         ];
     }
