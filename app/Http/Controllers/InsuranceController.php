@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\InputDTO;
 use App\Http\Requests\InsuranceRequest;
-use App\Http\Services\RiskProfileService;
+use App\Http\Services\Risk\RiskProfileService;
 use Illuminate\Http\JsonResponse;
 
 class InsuranceController extends Controller
 {
-    public function risk(InsuranceRequest $request): JsonResponse
+    public function calculateRiskProfile(InsuranceRequest $request): JsonResponse
     {
-        $riskProfileService = new RiskProfileService($request->all());
+        $input = new InputDTO($request->all());
+        $riskProfileService = new RiskProfileService($input);
 
         return response()->json($riskProfileService->calculate());
     }

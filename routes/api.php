@@ -22,6 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('insurance')->group(
     function () {
-        Route::post('risk', [InsuranceController::class, 'risk']);
+        Route::post('risk', [InsuranceController::class, 'calculateRiskProfile']);
     }
 );
