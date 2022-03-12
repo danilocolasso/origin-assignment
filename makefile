@@ -1,5 +1,5 @@
 start:
-	cp .env.example .env
+	cp .env.dev .env
 	docker-compose up -d --build
 	docker-compose exec app composer install
 	docker-compose exec app composer dump-autoload
