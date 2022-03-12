@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-class ProfileEnum extends AbstractEnum
+final class ProfileEnum extends AbstractEnum
 {
     public const IMMUTABLE = -1;
 

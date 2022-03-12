@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use App\Enums\ProfileEnum;
 
-class InelegibleRule extends AbstractRule
+class InelegibleRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {
@@ -17,11 +17,11 @@ class InelegibleRule extends AbstractRule
             $this->profiles->disability = ProfileEnum::IMMUTABLE;
         }
 
-        if (!$this->input->vehicle) {
+        if (!$this->input->vehicle->year) {
             $this->profiles->auto = ProfileEnum::IMMUTABLE;
         }
 
-        if (!$this->input->house) {
+        if (!$this->input->house->ownershipStatus) {
             $this->profiles->home = ProfileEnum::IMMUTABLE;
         }
     }

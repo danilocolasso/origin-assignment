@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use Carbon\Carbon;
 
-class VehicleRule extends AbstractRule
+class VehicleRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {

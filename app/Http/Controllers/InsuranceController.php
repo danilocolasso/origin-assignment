@@ -16,6 +16,4 @@ class InsuranceController extends Controller
 
         return response()->json($riskProfileService->calculate());
     }
-
-
 }

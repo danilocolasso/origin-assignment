@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use App\Enums\HouseEnum;
 
-class HouseRule extends AbstractRule
+class HouseRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {

@@ -16,7 +16,7 @@ services:
             SERVICE_NAME: app
             SERVICE_TAGS: dev
         ports:
-            - "7098:8002"
+            - "8000:8002"
         networks:
             - just-another-network
 

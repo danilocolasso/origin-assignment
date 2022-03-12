@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use App\Enums\MaritalStatusEnum;
 
-class MaritalStatusRule extends AbstractRule
+class MaritalStatusRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {

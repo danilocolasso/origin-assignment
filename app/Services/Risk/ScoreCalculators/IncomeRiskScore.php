@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
-class IncomeRule extends AbstractRule
+class IncomeRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {

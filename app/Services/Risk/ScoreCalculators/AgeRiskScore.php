@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use App\Enums\ProfileEnum;
 
-class AgeRule extends AbstractRule
+class AgeRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {
@@ -24,7 +24,7 @@ class AgeRule extends AbstractRule
     {
         if ($this->input->age < 30) {
             $this->deduct(2, 'all');
-        } else if ($this->input->age < 40) { // TODO: I don't like this...
+        } else if ($this->input->age < 40) {
             $this->deduct(1, 'all');
         }
     }

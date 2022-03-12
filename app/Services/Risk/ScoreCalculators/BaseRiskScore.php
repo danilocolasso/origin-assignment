@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use App\DTO\InputDTO;
 use App\DTO\ProfilesDTO;
 
-class BaseScoreRule
+class BaseRiskScore
 {
     protected ProfilesDTO $profiles;
 
@@ -13,7 +13,7 @@ class BaseScoreRule
         protected InputDTO $input
     ) {}
 
-    public function get(): ProfilesDTO
+    public function calculate(): ProfilesDTO
     {
         $this->calculateByRiskQuestions();
 

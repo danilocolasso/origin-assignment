@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
 use App\DTO\InputDTO;
 use App\DTO\ProfilesDTO;
 use App\Enums\ProfileEnum;
 
-abstract class AbstractRule
+abstract class AbstractRiskScore
 {
     public function __construct(
         protected ProfilesDTO $profiles,

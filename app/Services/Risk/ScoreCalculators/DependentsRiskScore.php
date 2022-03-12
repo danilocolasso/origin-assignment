@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Risk\Rules;
+namespace App\Services\Risk\ScoreCalculators;
 
-class DependentsRule extends AbstractRule
+class DependentsRiskScore extends AbstractRiskScore
 {
     public function calculate(): void
     {
@@ -11,7 +11,7 @@ class DependentsRule extends AbstractRule
 
     private function calcUserHasDependents(): void
     {
-        if ($this->input->dependents) {
+        if ($this->input->dependents > 0) {
             $this->add(1, ['disability', 'life']);
         }
     }

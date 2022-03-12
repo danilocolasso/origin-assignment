@@ -5,14 +5,14 @@ namespace App\Services\Risk;
 use App\DTO\InputDTO;
 use App\DTO\ProfilesDTO;
 use App\Enums\ProfileEnum;
-use App\Services\Risk\Rules\AgeRule;
-use App\Services\Risk\Rules\BaseScoreRule;
-use App\Services\Risk\Rules\DependentsRule;
-use App\Services\Risk\Rules\HouseRule;
-use App\Services\Risk\Rules\IncomeRule;
-use App\Services\Risk\Rules\InelegibleRule;
-use App\Services\Risk\Rules\MaritalStatusRule;
-use App\Services\Risk\Rules\VehicleRule;
+use App\Services\Risk\ScoreCalculators\AgeRiskScore;
+use App\Services\Risk\ScoreCalculators\BaseRiskScore;
+use App\Services\Risk\ScoreCalculators\DependentsRiskScore;
+use App\Services\Risk\ScoreCalculators\HouseRiskScore;
+use App\Services\Risk\ScoreCalculators\IncomeRiskScore;
+use App\Services\Risk\ScoreCalculators\InelegibleRiskScore;
+use App\Services\Risk\ScoreCalculators\MaritalStatusRiskScore;
+use App\Services\Risk\ScoreCalculators\VehicleRiskScore;
 
 class RiskProfileService
 {
@@ -24,15 +24,15 @@ class RiskProfileService
 
     public function calculate(): array
     {
-        $this->profiles = (new BaseScoreRule($this->input))->get();
+        $this->profiles = (new BaseRiskScore($this->input))->calculate();
 
-        (new InelegibleRule($this->profiles, $this->input))->calculate();
-        (new AgeRule($this->profiles, $this->input))->calculate();
-        (new IncomeRule($this->profiles, $this->input))->calculate();
-        (new HouseRule($this->profiles, $this->input))->calculate();
-        (new DependentsRule($this->profiles, $this->input))->calculate();
-        (new MaritalStatusRule($this->profiles, $this->input))->calculate();
-        (new VehicleRule($this->profiles, $this->input))->calculate();
+        (new InelegibleRiskScore($this->profiles, $this->input))->calculate();
+        (new AgeRiskScore($this->profiles, $this->input))->calculate();
+        (new IncomeRiskScore($this->profiles, $this->input))->calculate();
+        (new HouseRiskScore($this->profiles, $this->input))->calculate();
+        (new DependentsRiskScore($this->profiles, $this->input))->calculate();
+        (new MaritalStatusRiskScore($this->profiles, $this->input))->calculate();
+        (new VehicleRiskScore($this->profiles, $this->input))->calculate();
 
         return $this->scoreLabels();
     }
