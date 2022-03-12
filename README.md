@@ -58,6 +58,7 @@ It also requires a header exaclty like that
 - No database were used, since we don't have to persist or select anything.
 - No authentication was added, just a header token (cross api like) because it's not the assignment focus (I guess). But Lavavel provides some easy to work and worth auth vendors like [Passport](https://laravel.com/docs/8.x/passport) and [Fortify](https://laravel.com/docs/8.x/fortify).
 
+<p align="center">Hope y'all like it</p>
 <h4 align="center">
     Made with ♡ by <a href="https://www.linkedin.com/in/danilocolasso/" target="_blank">Danilo Colasso</a>
 </h4>
