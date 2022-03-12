@@ -4,7 +4,7 @@ namespace App\Enums;
 
 final class ProfileEnum extends AbstractEnum
 {
-    public const IMMUTABLE = -1;
+    public const IMMUTABLE = PHP_INT_MAX;
 
     public const INELIGIBLE = 'ineligible';
     public const ECONOMIC = 'economic';

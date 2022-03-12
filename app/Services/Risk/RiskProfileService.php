@@ -40,7 +40,7 @@ class RiskProfileService
     private function scoreLabels(): array
     {
         return array_map(
-            fn($line) => ProfileEnum::LABELS[$line],
+            fn($line) => ProfileEnum::LABELS[max($line, 0)],
             $this->profiles->toArray()
         );
     }
