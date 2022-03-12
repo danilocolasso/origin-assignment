@@ -1,0 +1,7 @@
+{
+    "age": "Yong",
+    "house": {"ownership_status": 1},
+    "income": "No",
+    "risk_questions": [1, 0],
+    "vehicle": {"year": "new"}
+}
