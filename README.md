@@ -24,7 +24,7 @@ Make sure you have installed Docker Desktop. If you don't, follow the <a href="h
 
 #### Start the project
     $ make start
-Just wait the containers be up and build the project :)
+Just wait the containers be up and the project build :)
 
 #### The only endpoint is
     Method: POST
@@ -33,7 +33,7 @@ It also requires a header exaclty like that
     
     x-api-key: some-hash
 
-... Or just import cURL on your favorit API Platform tester
+... Or just import cURL on your favorite API Platform tester
 
     curl --location --request POST 'localhost:8000/api/insurance/risk' \
     --header 'x-api-key: some-hash' \
