@@ -39,6 +39,12 @@ class InsuranceRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        if ($this->json()->all()) {
+            $this->merge(
+                json_decode($this->getContent(), true)
+            );
+        }
+
         $this->merge([
             'risk_questions' => $this->filterArrayBoolElements($this->get('risk_questions')),
         ]);
