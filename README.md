@@ -1,64 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+[![Maintenance Status][status-image]][status-url]
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Origin Backend Take-Home Assignment
+===================
 
-## About Laravel
+## Before install
+Make sure you have installed Docker Desktop. If you don't, follow the <a href="https://www.docker.com/get-started" target="_blank">Get Started with Docker</a>.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies used
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Docker](https://www.docker.com/) - Containerize the Application.
+- [Composer](https://getcomposer.org/) - A Dependency Manager for PHP.
+- [Laravel 8.x](https://laravel.com/docs/8.x) - Backend PHP Framework.
+- [xdebug 3.x](https://xdebug.org/) - For a better debug, specially with [PHPStorm](https://www.jetbrains.com/phpstorm/).
+- [PHPUnit](https://phpunit.readthedocs.io/en/latest/) - A programmer-oriented testing framework for PHP.
+- [Data Transfer Objects](https://github.com/spatie/data-transfer-object) - To construct objects from arrays for a cleaner and more consistent code.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation guide
 
-## Learning Laravel
+#### Download and unzip the project or clone it from my GitHub
+    $ git clone https://github.com/danilocolasso/origin-assignment
+    
+    $ cd origin-assignment
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Start the project
+    $ make start
+Just wait the containers be up and build the project :)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### The only endpoint is
+    Method: POST
+    http://localhost:8000/api/insurance/risk
+It also requires a header exaclty like that
+    
+    x-api-key: some-hash
 
-## Laravel Sponsors
+... Or just import cURL on your favorit API Platform tester
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    curl --location --request POST 'localhost:8000/api/insurance/risk' \
+    --header 'x-api-key: some-hash' \
+    --header 'Content-Type: text/plain' \
+    --data-raw '{
+        "age": 35,
+        "dependents": 2,
+        "house": {"ownership_status": "owned"},
+        "income": 0,
+        "marital_status": "married",
+        "risk_questions": [0, 1, 0],
+        "vehicle": {"year": 2018}
+    }'
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Decisions made
+- First, I decided to use PHP because I am more familiar with it, as I work with it daily.
+- I chose Laravel for the same reason, also because It is one of the most popular PHP frameworks, easy to work and have a clean architeture.
+- I decided to split the Service into some business rules for better simplicity, readability and maintainability.
+- All the validations are being done in the `InsuranceRequest`, for a cleanner Controller, without any logic.
+- Data Transfer Objects make PHP code more consistent since you don't need to worry about a missing index on array. You know exactly what you will have and its type. Also, can have automated casts to Objects and index mapping to/from json.
+- No database were used, since we don't have to persist or select anything.
+- No authentication was added, just a header token (cross api like) because it's not the assignment focus (I guess). But Lavavel provides some easy to work and worth auth vendors like [Passport](https://laravel.com/docs/8.x/passport) and [Fortify](https://laravel.com/docs/8.x/fortify).
 
-## Contributing
+<h4 align="center">
+    Made with ♡ by <a href="https://www.linkedin.com/in/danilocolasso/" target="_blank">Danilo Colasso</a>
+</h4>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[status-url]: https://github.com/danilocolasso/origin-assignment/pulse
+[status-image]: https://img.shields.io/github/last-commit/danilocolasso/origin-assignment
